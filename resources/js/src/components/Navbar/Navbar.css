@@ -2,7 +2,10 @@
     background-color: #9b2226;
 }
 
-a, a:hover, a:link, a:active{
+#header a, 
+#header a:hover, 
+#header a:link, 
+#header a:active{
     color:#e9d8a6;
     transition: all .3s linear;
 }
@@ -11,8 +14,6 @@ a:hover{
     transform:scale(1.03);
 }
 
-
-
 .form-search{
     display:flex;
     flex-flow: row wrap;
@@ -20,8 +21,45 @@ a:hover{
     background-color: #fff;
     border-radius: 30px;
     overflow: hidden;
+    position: relative;
 }
 
 .form-search input[type="search"]{
     border: none;
+}
+
+.form-search [type="submit"]{
+    position:absolute !important;
+    right:5px;
+    top: 0;
+}
+
+@media screen and (max-width:767px){
+    .form-search [type="submit"]{
+        top: -6px !important;
+    }
+}
+
+.navbar-toggler{
+    position:relative;
+}
+
+.navbar-toggler[aria-expanded="false"] .navbar-toggler-icon::before{
+    content:"MENU";
+    color: #e9d8a6;
+    line-height:27px;
+    position:absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before{
+    content:"X";
+    color: #e9d8a6;
+    line-height:27px;
+    position:absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
 }

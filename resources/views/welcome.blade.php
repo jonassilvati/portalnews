@@ -15,7 +15,7 @@
     <body >
         <div id="app"></div>
         
-        <script src="https://kit.fontawesome.com/5fb8382235.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
         <script src="{{asset('js/app.js')}}"></script>
     </body>
 </html>
