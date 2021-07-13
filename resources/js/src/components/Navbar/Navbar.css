@@ -1,0 +1,27 @@
+#header{
+    background-color: #9b2226;
+}
+
+a, a:hover, a:link, a:active{
+    color:#e9d8a6;
+    transition: all .3s linear;
+}
+
+a:hover{
+    transform:scale(1.03);
+}
+
+
+
+.form-search{
+    display:flex;
+    flex-flow: row wrap;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.form-search input[type="search"]{
+    border: none;
+}

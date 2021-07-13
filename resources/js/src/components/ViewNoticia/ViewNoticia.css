@@ -1,0 +1,13 @@
+.container-text-news{
+    margin: 10px 0 40px;
+}
+
+.dash-edit{
+    margin-top: 60px;
+}
+
+.dash-edit > div{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
