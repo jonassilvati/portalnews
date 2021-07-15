@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import api from '../../api';
 import { useParams } from 'react-router';
 import AppContainer from '../AppContainer';
-import Noticia from '../Noticia';
+import Noticia from '../News';
 
 
 const Search = () => {
@@ -17,7 +17,7 @@ const Search = () => {
             setNews(res.data.data);
             setQtd(res.data.data.length);
         })
-    },[]);
+    },[s]);
 
     return(
         <AppContainer
@@ -26,7 +26,7 @@ const Search = () => {
             <div className="grid-noticias">
                 {(news && news.length > 0) ? news.map((n)=>(
                     <Noticia key={n.id} id={n.id} title={n.title} content={n.content} />
-                )) : <p>Carregando dados...</p>
+                )) : <p>Sem notícias...</p>
             
                 }
             </div>

@@ -10,8 +10,12 @@
     transition: all .3s linear;
 }
 
+.dropdown-item{
+    color: #090909 !important;
+}
+
 a:hover{
-    transform:scale(1.03);
+    transform:scale(1.01);
 }
 
 .form-search{

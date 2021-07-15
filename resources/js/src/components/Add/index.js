@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { Link, useHistory } from 'react-router-dom';
@@ -11,6 +11,8 @@ import api from '../../api';
 const Add = () => {
 
     const [title, setTitle] = useState('');
+    const [categories, setCategories] = useState([]);
+    const [category, setCategory] = useState(0);
 
     const editorRef = useRef(null);  
 
@@ -19,7 +21,7 @@ const Add = () => {
     const addNews = async (e) => {
         e.preventDefault();
         try{
-            await api.addNews({title: title, content: editorRef.current.getContent()}).then(res => {
+            await api.addNews({title: title, category: category, content: editorRef.current.getContent()}).then(res => {
                 toast.dark(res.data.data, {
                     onClose: () => history.push('/'),
                     autoClose: 1500
@@ -29,6 +31,13 @@ const Add = () => {
             toast('Falha ao salvar notícia');
         }
     }
+
+    useEffect(()=>{
+        api.getAllCategories().then(res => {
+            setCategories(res.data.data);
+            console.log(categories);
+        })
+    },[])
 
 
     return(
@@ -49,6 +58,19 @@ const Add = () => {
                         id="title" 
                         onChange={ (e) => setTitle(e.target.value) } 
                         value={title}/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="category">Categoria</label>
+                    <select class="form-control" id="category" name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+                        <option>Selecione uma categoria</option>
+                        {categories &&
+                            
+                            categories.map((cat) => {
+                                return <option value={cat.id}>{cat.name}</option>
+                            })
+
+                        }
+                    </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="content">Conteúdo</label>

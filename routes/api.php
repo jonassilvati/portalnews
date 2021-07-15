@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,4 +22,7 @@ use App\Http\Controllers\NewsController;
 
 Route::resource('news', NewsController::class);
 
+Route::resource('category', CategoryController::class);
+
 Route::get('search/{s}', [NewsController::class, 'search']);
+Route::get('bycategory/{id}', [NewsController::class, 'byCategory']);

@@ -1,12 +1,13 @@
-import axios from 'axios';
-import React, { useState } from  'react';
-import { Link, useHistory } from 'react-router-dom'
+import React, { useEffect, useState } from  'react';
+import { Link, useHistory } from 'react-router-dom';
+import api from '../../api';
 
 import './Navbar.css';
 
 const Navbar = () => {
 
-    const [ s, setS ] = useState('');
+    const [s, setS] = useState('');
+    const [categories, setCategories] = useState([])
 
     let history = useHistory();
 
@@ -14,6 +15,25 @@ const Navbar = () => {
         history.replace(`/search/${s}`);
         e.preventDefault();
     }
+
+    const breakText = (text, i) => {
+        let words = text.split(" ").slice(0, i);
+        let last_word = words[words.length - 1];
+
+        
+        if(last_word.charAt(last_word.length - 1) != '.' && words.length >= i){
+            words.pop();
+            words.push( last_word + '...' );
+        }    
+
+        return words.join(' ');
+    }
+
+    useEffect(()=>{
+        api.getAllCategories().then(res => {
+            setCategories(res.data.data);
+        })
+    },[])
     
     return(
         <section id="header">
@@ -25,12 +45,26 @@ const Navbar = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarText">
                         <ul className="navbar-nav ml-auto">
-                        <li className="nav-item active">                            
-                            <Link className="nav-link" to="/" >Home</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/add">Cadastrar</Link>
-                        </li>
+                            <li className="nav-item active">                            
+                                <Link className="nav-link" to="/" >Home</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/add">Cadastrar</Link>
+                            </li>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Categorias
+                                </a>
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    {categories && 
+                                        categories.map((cat) => {
+                                            return <Link key={cat.id} to={`/bycategory/${cat.id}`} className="dropdown-item">{ `${breakText(cat.name, 3)}` }</Link>
+                                        })
+                                    }
+                                    <div className="dropdown-divider"></div>
+                                    <Link to="/category" className="dropdown-item">Gerenciar</Link>
+                                </div>
+                            </li>
                         </ul>
                         <form className="form-inline form-search" onSubmit={ getSearch }>
                             <input className="form-control mr-sm-2" onChange={ (e) => setS(e.target.value) } value={s} type="search" placeholder="Search" />

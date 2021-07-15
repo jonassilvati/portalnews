@@ -34,6 +34,7 @@ class NewsController extends Controller
         $news = new News();
         $news->title = $request->title;
         $news->content = $request->content;
+        $news->category()->associate($request->category);
         $news->save();
 
         return response()->json([
@@ -69,6 +70,7 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         $news->title = $request->title;
         $news->content = $request->content;
+        $news->category()->associate($request->category);
         $news->save();
 
         return response()->json([
@@ -103,6 +105,14 @@ class NewsController extends Controller
                 ->orWhere('content','like',"%{$s}%")
                 ->get()
         );       
-        
+    }
+
+    /**
+     * Pegar news por categoria
+     */
+    public function byCategory(Request $request, $id){
+
+        return NewsResource::collection(News::where('category_id', $id)->get());        
+
     }
 }

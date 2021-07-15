@@ -2,7 +2,7 @@
 
 .item-noticia{
     width: auto;
-    padding: 20px ;
+    padding: 20px 20px 80px;
     border-radius: 4px;
     background-color: #e9d8a6;
     position: relative;
@@ -20,10 +20,12 @@
 }
 
 .item-noticia .title-card-news{
+    display: block;
     font-size: 16px;
     font-weight: 600;
     line-height: 18px;
     color: #001219;
+    margin-bottom: 20px;
 }
 
 .content-card-news{
@@ -32,8 +34,11 @@
 }
 
 .container-btn-learnmore{
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
     display: flex;
-    justify-content: center;
 }
 
 .container-btn-learnmore a{

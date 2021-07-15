@@ -47,7 +47,7 @@ const ViewNoticia = () => {
             <div className="dash-edit">
                 <hr></hr>
                 <div style={{marginTop:'10px'}} >
-                    <Link to={`/noticia/${id}/edit`} className="btn btn-warning"><i className="fas fa-edit"></i> Editar</Link>
+                    <Link to={`/news/${id}/edit`} className="btn btn-warning"><i className="fas fa-edit"></i> Editar</Link>
                     <button onClick={deleteItem} style={{marginLeft:'10px'}} className="btn btn-danger"><i className="fas fa-trash"></i> Apagar</button>
                 </div>
             </div>
